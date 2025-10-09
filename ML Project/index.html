@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"></link>
+    <title>FlightDelay Pro - Manage Flight Delays</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <script src="code.js"></script>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-plane-departure"></i>
+                    <span>FlightDelay Pro</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="login">Login</a></li>
+                    <li><a href="#" class="nav-link" data-page="signup">Sign Up</a></li>
+                    <li><a href="#" class="nav-link" data-page="contact">Contact Us</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="login-btn">Login</button>
+                    <button class="btn btn-primary" id="signup-btn">Sign Up</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <section id="home-page" class="page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Manage Flight Delays with Ease</h1>
+                <p>FlightDelay Pro helps airlines and passengers track, manage, and mitigate flight delays with real-time updates and predictive analytics.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-accent">Get Started</button>
+                    <button class="btn btn-outline">Learn More</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Features</h2>
+                    <p>Comprehensive tools to manage flight delays effectively</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Real-time Tracking</h3>
+                        <p>Monitor flight status in real-time with instant delay notifications</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Predictive Analytics</h3>
+                        <p>AI-powered predictions to anticipate potential delays before they happen</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Passenger Communication</h3>
+                        <p>Automated notifications to keep passengers informed about delays</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- Login Page -->
+    <section id="login-page" class="page hidden">
+        <div class="page-section">
+            <div class="container">
+                <div class="form-container">
+                    <h2 class="form-title">Login to Your Account</h2>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Email Address</label>
+                            <input type="email" id="login-email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" class="form-control" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        <div class="form-footer">
+                            <p>Don't have an account? <a href="#" id="signup-link">Sign up here</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sign Up Page -->
+    <section id="signup-page" class="page hidden">
+        <div class="page-section">
+            <div class="container">
+                <div class="form-container">
+                    <h2 class="form-title">Create an Account</h2>
+                    <form id="signup-form">
+                        <div class="form-group">
+                            <label for="signup-name">Full Name</label>
+                            <input type="text" id="signup-name" class="form-control" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-email">Email Address</label>
+                            <input type="email" id="signup-email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-password">Password</label>
+                            <input type="password" id="signup-password" class="form-control" placeholder="Create a password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-confirm">Confirm Password</label>
+                            <input type="password" id="signup-confirm" class="form-control" placeholder="Confirm your password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                        <div class="form-footer">
+                            <p>Already have an account? <a href="#" id="login-link">Login here</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Page -->
+    <section id="contact-page" class="page hidden">
+        <div class="page-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Contact Us</h2>
+                    <p>Get in touch with our team for any inquiries or support</p>
+                </div>
+                
+                <div class="form-container">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="contact-name">Your Name</label>
+                            <input type="text" id="contact-name" class="form-control" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email Address</label>
+                            <input type="email" id="contact-email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject">Subject</label>
+                            <input type="text" id="contact-subject" class="form-control" placeholder="Enter subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" class="form-control" rows="5" placeholder="Enter your message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Our Location</h3>
+                        <p>123 Aviation Way, Airport City</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3>Phone Number</h3>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email Address</h3>
+                        <p>support@flightdelaypro.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard (Shown after login) -->
+    <section id="dashboard" class="page hidden">
+        <div class="page-section">
+            <div class="container">
+                <div class="dashboard-header">
+                    <h2>Flight Delay Dashboard</h2>
+                    <button class="btn btn-outline" id="logout-btn">Logout</button>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Flights</h3>
+                        <div class="stat-value">142</div>
+                        <p>Today</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Delayed Flights</h3>
+                        <div class="stat-value">18</div>
+                        <p>12.7% of total</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Avg. Delay Time</h3>
+                        <div class="stat-value">47m</div>
+                        <p>Across all flights</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>On-time Performance</h3>
+                        <div class="stat-value">87.3%</div>
+                        <p>Better than average</p>
+                    </div>
+                </div>
+                
+                <div class="flights-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Flight No.</th>
+                                <th>Route</th>
+                                <th>Departure</th>
+                                <th>Arrival</th>
+                                <th>Status</th>
+                                <th>Delay</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>FD101</td>
+                                <td>JFK → LAX</td>
+                                <td>08:00 AM</td>
+                                <td>11:15 AM</td>
+                                <td><span class="status status-ontime">On Time</span></td>
+                                <td>0 min</td>
+                            </tr>
+                            <tr>
+                                <td>FD205</td>
+                                <td>ORD → MIA</td>
+                                <td>09:30 AM</td>
+                                <td>12:45 PM</td>
+                                <td><span class="status status-delayed">Delayed</span></td>
+                                <td>35 min</td>
+                            </tr>
+                            <tr>
+                                <td>FD312</td>
+                                <td>DFW → SEA</td>
+                                <td>10:15 AM</td>
+                                <td>01:20 PM</td>
+                                <td><span class="status status-ontime">On Time</span></td>
+                                <td>0 min</td>
+                            </tr>
+                            <tr>
+                                <td>FD418</td>
+                                <td>ATL → DEN</td>
+                                <td>11:00 AM</td>
+                                <td>12:45 PM</td>
+                                <td><span class="status status-delayed">Delayed</span></td>
+                                <td>55 min</td>
+                            </tr>
+                            <tr>
+                                <td>FD527</td>
+                                <td>LAX → ORD</td>
+                                <td>12:30 PM</td>
+                                <td>05:45 PM</td>
+                                <td><span class="status status-ontime">On Time</span></td>
+                                <td>0 min</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>FlightDelay Pro</h3>
+                    <p>Advanced flight delay management system for airlines and passengers.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Delay Tracking</a></li>
+                        <li><a href="#">Predictive Analytics</a></li>
+                        <li><a href="#">Passenger Notifications</a></li>
+                        <li><a href="#">Reporting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 FlightDelay Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
