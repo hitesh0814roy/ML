@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlightDelay Pro - Real-time Flight & Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-plane-departure"></i>
+                <span>FlightDelay Pro</span>
+            </div>
+            <nav class="nav">
+                <a href="#dashboard" class="nav-link active">Dashboard</a>
+                <a href="#airlines" class="nav-link">Airlines</a>
+                <a href="#weather" class="nav-link">Weather</a>
+                <a href="#analytics" class="nav-link">Analytics</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn btn-outline" id="refreshBtn">
+                    <i class="fas fa-sync-alt"></i>
+                    Refresh Data
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Dashboard Overview -->
+        <section id="dashboard" class="section">
+            <div class="container">
+                <h2 class="section-title">Flight Operations Dashboard</h2>
+                
+                <!-- Stats Overview -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-plane"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="totalFlights">24</h3>
+                            <p>Active Flights</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon delayed">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="delayedFlights">8</h3>
+                            <p>Delayed Flights</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon weather">
+                            <i class="fas fa-cloud-rain"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="weatherImpact">34%</h3>
+                            <p>Weather Impact</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon ontime">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3 id="ontimeFlights">16</h3>
+                            <p>On Time</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Grid -->
+                <div class="main-grid">
+                    <!-- Flight List -->
+                    <div class="card flight-list-card">
+                        <div class="card-header">
+                            <h3>Live Flight Status</h3>
+                            <div class="card-actions">
+                                <button class="btn-filter active">All</button>
+                                <button class="btn-filter">Delayed</button>
+                                <button class="btn-filter">On Time</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="flight-list" id="flightList">
+                                <!-- Flight items will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weather Map -->
+                    <div class="card weather-card">
+                        <div class="card-header">
+                            <h3>Live Weather Map</h3>
+                            <div class="weather-controls">
+                                <button class="btn-weather active" data-type="temperature">
+                                    <i class="fas fa-thermometer-half"></i>
+                                </button>
+                                <button class="btn-weather" data-type="precipitation">
+                                    <i class="fas fa-cloud-rain"></i>
+                                </button>
+                                <button class="btn-weather" data-type="wind">
+                                    <i class="fas fa-wind"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="weather-map" id="weatherMap">
+                                <div class="map-placeholder">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                    <p>Live Weather Visualization</p>
+                                    <div class="weather-legend">
+                                        <div class="legend-item">
+                                            <span class="legend-color temp-hot"></span>
+                                            <span>Hot (>30°C)</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <span class="legend-color temp-mild"></span>
+                                            <span>Mild (15-30°C)</span>
+                                        </div>
+                                        <div class="legend-item">
+                                            <span class="legend-color temp-cool"></span>
+                                            <span>Cool (<15°C)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delay Analytics -->
+                    <div class="card analytics-card">
+                        <div class="card-header">
+                            <h3>Delay Analytics</h3>
+                            <select id="timeRange" class="time-select">
+                                <option value="today">Today</option>
+                                <option value="week">This Week</option>
+                                <option value="month">This Month</option>
+                            </select>
+                        </div>
+                        <div class="card-body">
+                            <div class="delay-chart" id="delayChart">
+                                <div class="chart-placeholder">
+                                    <i class="fas fa-chart-bar"></i>
+                                    <p>Delay Statistics Chart</p>
+                                    <div class="chart-bars">
+                                        <div class="chart-bar weather" style="height: 70%">
+                                            <span>Weather</span>
+                                        </div>
+                                        <div class="chart-bar air-traffic" style="height: 50%">
+                                            <span>Air Traffic</span>
+                                        </div>
+                                        <div class="chart-bar technical" style="height: 30%">
+                                            <span>Technical</span>
+                                        </div>
+                                        <div class="chart-bar other" style="height: 20%">
+                                            <span>Other</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Airport Weather -->
+                    <div class="card airport-weather-card">
+                        <div class="card-header">
+                            <h3>Major Airport Weather</h3>
+                            <div class="view-toggle">
+                                <button class="btn-toggle active">List</button>
+                                <button class="btn-toggle">Grid</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="airport-weather-list" id="airportWeather">
+                                <!-- Airport weather items will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Airlines Section -->
+        <section id="airlines" class="section">
+            <div class="container">
+                <h2 class="section-title">Airlines & Fleet Information</h2>
+                <div class="airlines-grid" id="airlinesGrid">
+                    <!-- Airline cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Weather Details Section -->
+        <section id="weather" class="section">
+            <div class="container">
+                <h2 class="section-title">Detailed Weather Analysis</h2>
+                <div class="weather-details-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Weather Impact Factors</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="impact-factors">
+                                <div class="impact-factor">
+                                    <div class="factor-icon">
+                                        <i class="fas fa-wind"></i>
+                                    </div>
+                                    <div class="factor-info">
+                                        <h4>Wind Speed</h4>
+                                        <p>High winds can cause takeoff/landing delays</p>
+                                        <div class="factor-impact">
+                                            <span class="impact-level high">High Impact</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="impact-factor">
+                                    <div class="factor-icon">
+                                        <i class="fas fa-cloud-rain"></i>
+                                    </div>
+                                    <div class="factor-info">
+                                        <h4>Precipitation</h4>
+                                        <p>Rain/snow affects visibility and runway conditions</p>
+                                        <div class="factor-impact">
+                                            <span class="impact-level medium">Medium Impact</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="impact-factor">
+                                    <div class="factor-icon">
+                                        <i class="fas fa-eye"></i>
+                                    </div>
+                                    <div class="factor-info">
+                                        <h4>Visibility</h4>
+                                        <p>Low visibility requires instrument approaches</p>
+                                        <div class="factor-impact">
+                                            <span class="impact-level high">High Impact</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="impact-factor">
+                                    <div class="factor-icon">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <div class="factor-info">
+                                        <h4>Thunderstorms</h4>
+                                        <p>Lightning and turbulence cause significant delays</p>
+                                        <div class="factor-impact">
+                                            <span class="impact-level critical">Critical Impact</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Flight Detail Modal -->
+    <div id="flightModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalFlightNumber">Flight Details</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="flight-detail-grid">
+                    <div class="detail-section">
+                        <h4>Route Information</h4>
+                        <div class="route-info">
+                            <div class="airport">
+                                <strong id="departureAirport">JFK</strong>
+                                <span id="departureCity">New York</span>
+                            </div>
+                            <div class="route-line">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <div class="airport">
+                                <strong id="arrivalAirport">LAX</strong>
+                                <span id="arrivalCity">Los Angeles</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h4>Schedule & Status</h4>
+                        <div class="schedule-info">
+                            <div class="time-slot">
+                                <label>Scheduled</label>
+                                <span id="scheduledTime">14:30</span>
+                            </div>
+                            <div class="time-slot">
+                                <label>Estimated</label>
+                                <span id="estimatedTime" class="delayed">15:45</span>
+                            </div>
+                            <div class="time-slot">
+                                <label>Delay</label>
+                                <span id="delayTime" class="delay-badge">75 min</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h4>Weather Impact Analysis</h4>
+                        <div class="weather-impact">
+                            <div class="impact-meter">
+                                <div class="meter-labels">
+                                    <span>Low</span>
+                                    <span>High</span>
+                                </div>
+                                <div class="meter-bar">
+                                    <div class="meter-fill" id="weatherImpactBar" style="width: 70%"></div>
+                                </div>
+                            </div>
+                            <div class="impact-factors">
+                                <div class="factor">
+                                    <span>Wind</span>
+                                    <span class="factor-value high">High</span>
+                                </div>
+                                <div class="factor">
+                                    <span>Visibility</span>
+                                    <span class="factor-value medium">Medium</span>
+                                </div>
+                                <div class="factor">
+                                    <span>Precipitation</span>
+                                    <span class="factor-value low">Low</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Loading flight data...</p>
+    </div>
+
+    <script src="code.js"></script>
+</body>
+</html>
